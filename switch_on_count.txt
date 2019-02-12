@@ -1,0 +1,11 @@
+total_switches = [*1..100]
+switches = {}
+total_switches.each { |n| switches[n] = false }
+
+total_switches.each do |key|
+  total_switches.each { |k, _v| switches[k] = !switches[k] if k%key == 0 }
+end
+
+switches_on = switches.select{ |_k,v| v }.count
+
+puts " Total no. of switches with ON status #{switches_on}"

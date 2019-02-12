@@ -1,0 +1,42 @@
+
+def encode(_)
+    str_arr = _.split('')
+    return_value = ''
+    temp = []
+    str_arr.each_with_index do |val, i|
+        if val == str_arr[i+1]
+            temp << val
+        else 
+            len = temp.length.zero? ? '' :temp.length + 1
+            return_value = [return_value,val,len].join('')
+            temp = []
+        end
+    end
+    return_value
+end
+
+def decode(_)
+    str_arr = _.scan(/\d+|[A-Za-z]+/)
+    return_value = ''
+    temp = ''
+    str_arr.each do | val |
+        if val.to_i.zero?
+            temp = val
+        else
+            arr = temp.split('')
+            data = arr.pop
+            extra_val = arr.join('')
+            return_value = return_value + extra_val + data * val.to_i
+            temp = ''
+        end
+    end
+    return_value
+end
+
+puts encode("aaabbcccabbcc") # => a3b2c3ab2c2
+puts decode("a3b2c3ab2c2") # => aaabbcccabbcc
+puts decode("a13b12c13ab12c12") # => ?
+
+# puts 'a3b2c3ab22c2'.scan(/\d+|[A-Za-z]+/)
+
+# puts "".methods
